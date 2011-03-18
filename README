@@ -1,3 +1,14 @@
+-------------------------
+This script is only needed to be runed the first time you want to install all the stuff on your computer. If you have already done that please use the build.sh script from your desktop
+
+This is just a compilation of the wiki/guide given from http://wiki.cyanogenmod.com
+
+Thank @Cyanogen and #teamdouche for the ROMs and CM7
+
+This is gonna take some time and HDD space to complete. If you don't have the time to let the computer running or you dont have 7GB on your HDD please quit and try again when requirements (time/space) meet
+
+-------------------------
+
 A few words from Cyanogen (copied from his posts of nightlies/RCs and stable cm releases)
 
 CyanogenMod is a free, community built distribution of Android 2.3 (Gingerbread) which greatly extends the capabilities of your phone.
@@ -47,11 +58,3 @@ The preferred method of installation is via ROM Manager, or you can head over to
 
 Thank you to EVERYONE involved in helping with testing, coding, debugging and documenting! Enjoy!
 
--------------------------"
-This script is only needed to be runed the first time you want to install all the stuff on your computer. If you have already done that please use the build.sh script from your desktop
-
-This is just a compilation of the wiki/guide given from http://wiki.cyanogenmod.com
-
-Thank @Cyanogen and #teamdouche for the ROMs and CM7
-
-This is gonna take some time and HDD space to complete. If you don't have the time to let the computer running or you dont have 7GB on your HDD please quit and try again when requirements (time/space) meet
