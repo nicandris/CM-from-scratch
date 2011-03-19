@@ -83,7 +83,7 @@ You sir/madam are an #epicfail (jk). Please read the above and try again.
 
 
 ##http://wiki.cyanogenmod.com/index.php?title=Building_from_source
-##sync commands use nohup so u wont have to have the terminal open...
+
 
 cd;
 echo -e '\E[37;40m'"\033[1m
@@ -121,8 +121,8 @@ echo
 		mv android-sdk_r* ~/;
 		cd ~/android-sdk*;
 		cd tools;
-		nohup ./android update sdk -u;
-		nohup ./android update adb;
+		./android update sdk -u;
+		./android update adb;
 		cd ~/android-sdk*/platform-tools/;
 		##fastboot will be downloaded from my dropbox dir. if update available please inform me
 		wget http://dl.dropbox.com/u/6751304/fastboot;
@@ -162,7 +162,7 @@ echo -e '\E[37;40m'"\033[1m
                                 Repo initialized! (Please note that this is gonna take emmmm... SOOOOOOOOME time to complete.
 \033[0m"
 
-nohup repo sync -j16
+repo sync -j16
 echo -e '\E[37;40m'"\033[1m
                                 First sync completed! (that took some time didn't it).
 \033[0m"
@@ -455,7 +455,7 @@ done
 ~/android/system/vendor/cyanogen/get-rommanager
 
 cd ~/android/system/
-nohup repo sync
+repo sync
 
 . build/envsetup.sh && brunch $_device
 
