@@ -466,16 +466,13 @@ cp ~/android/system/out/target/product/$_device/update*.md5sum ~/Desktop/Builds/
 
 ##Create the build.sh script
 
-if [[ -f ~/Desktop/build.sh ]] ; then
-            rm ~/Desktop/build.sh
-        else            
-fi
-sudo sh -c "echo 'cd ~/android/system' >> ~/Desktop/build.sh"
-sudo sh -c "echo 'repo sync' >> ~/Desktop/build.sh"
-sudo sh -c "echo '. build/envsetup.sh && brunch $_device' >> ~/Desktop/build.sh"
-sudo sh -c "echo 'cp ~/android/system/out/target/product/$_device/update*.zip ~/Desktop/Builds/update-cm7-$_device-$(date +%d_%m-%H.%M).zip' >> ~/Desktop/build.sh"
-sudo sh -c "echo 'cp ~/android/system/out/target/product/$_device/update*.md5sum ~/Desktop/Builds/update-cm7-$_device-$(date +%d_%m-%H.%M).md5sum' >> ~/Desktop/build.sh"
-sudo chmod 775 ~/Desktop/build.sh
+rm ~/Desktop/build.sh
+sh -c "echo 'cd ~/android/system' >> ~/Desktop/build.sh"
+sh -c "echo 'repo sync' >> ~/Desktop/build.sh"
+sh -c "echo '. build/envsetup.sh && brunch $_device' >> ~/Desktop/build.sh"
+sh -c "echo 'cp ~/android/system/out/target/product/$_device/update*.zip ~/Desktop/Builds/update-cm7-$_device-\$(date +%d_%m-%H.%M).zip' >> ~/Desktop/build.sh"
+sh -c "echo 'cp ~/android/system/out/target/product/$_device/update*.md5sum ~/Desktop/Builds/update-cm7-$_device-\$(date +%d_%m-%H.%M).md5sum' >> ~/Desktop/build.sh"
+chmod 775 ~/Desktop/build.sh
 echo
 echo "Time to check your build in your Builds folder on your Desktop."
 echo
