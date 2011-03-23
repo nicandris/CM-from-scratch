@@ -460,7 +460,14 @@ repo sync
 . build/envsetup.sh && brunch $_device
 
 ##The builds will be copied to the desktop folder Builds. delete these 3 lines if not wanted
-mkdir ~/Desktop/Builds
+
+if [[ -d ~/Desktop/Builds ]] ; then
+            echo '~/Desktop/Builds' 'Dir Exists'
+        else
+            mkdir ~/Desktop/Builds
+        fi
+
+
 cp ~/android/system/out/target/product/$_device/update*.zip ~/Desktop/Builds/update-cm7-$_device-$(date +%d_%m-%H.%M).zip
 cp ~/android/system/out/target/product/$_device/update*.md5sum ~/Desktop/Builds/update-cm7-$_device-$(date +%d_%m-%H.%M).md5sum
 
