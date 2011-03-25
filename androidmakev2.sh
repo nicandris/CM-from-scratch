@@ -385,7 +385,7 @@ case  $vendor in
 		_device="buzz"
 		_udev_v="0bb4"
 		;;	
-          17) echo "Vendor=HTC, Device=Leo"
+         17) echo "Vendor=HTC, Device=Leo"
 		_vendor="htc"
 		_device="leo"
 		_udev_v="0bb4"
