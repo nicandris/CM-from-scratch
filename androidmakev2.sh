@@ -206,6 +206,7 @@ HTCdev_menu() {
 	echo 14.Slide
 	echo 15.Vision
 	echo 16.Wildfire
+        echo 17.Leo
 }
 
 ## Prints Samsung devices selection menu
@@ -283,11 +284,11 @@ case  $vendor in
 	;;
  3) HTCdev_menu
 	echo
-	echo -n "Select Device(1-16): "
+	echo -n "Select Device(1-17): "
 	read device
-	while [[ $device -lt 1 || $device -gt 16 ]]; do
+	while [[ $device -lt 1 || $device -gt 17 ]]; do
 		echo "Selection ERROR.."
-		echo -n "Select Device(1-16): "
+		echo -n "Select Device(1-17): "
 		read device
 	done
 	echo
@@ -384,7 +385,12 @@ case  $vendor in
 		_device="buzz"
 		_udev_v="0bb4"
 		;;	
-	esac
+          17) echo "Vendor=HTC, Device=Leo"
+		_vendor="htc"
+		_device="leo"
+		_udev_v="0bb4"
+		;;	
+           esac
 	;;
 esac
 
