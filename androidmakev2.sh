@@ -486,6 +486,7 @@ sh -c "echo '. build/envsetup.sh && brunch $_device' >> ~/Desktop/build.sh"
 sh -c "echo 'cp ~/android/system/out/target/product/$_device/update*.zip ~/Desktop/Builds/update-cm7-$_device-\$(date +%d_%m-%H.%M).zip' >> ~/Desktop/build.sh"
 sh -c "echo 'cp ~/android/system/out/target/product/$_device/update*.md5sum ~/Desktop/Builds/update-cm7-$_device-\$(date +%d_%m-%H.%M).md5sum' >> ~/Desktop/build.sh"
 chmod 775 ~/Desktop/build.sh
+
 echo
 echo "Time to check your build in your Builds folder on your Desktop."
 echo
