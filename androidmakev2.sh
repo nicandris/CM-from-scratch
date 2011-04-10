@@ -496,12 +496,27 @@ cp ~/android/system/out/target/product/$_device/update*.md5sum ~/Desktop/Builds/
 ##Create the build.sh script
 
 rm ~/Desktop/build.sh
+if [ "$_incompatible" == "0" ]; then {
 sh -c "echo 'cd ~/android/system' >> ~/Desktop/build.sh"
 sh -c "echo 'repo sync' >> ~/Desktop/build.sh"
 sh -c "echo '. build/envsetup.sh && brunch $_device' >> ~/Desktop/build.sh"
 sh -c "echo 'cp ~/android/system/out/target/product/$_device/update*.zip ~/Desktop/Builds/update-cm7-$_device-\$(date +%d_%m-%H.%M).zip' >> ~/Desktop/build.sh"
 sh -c "echo 'cp ~/android/system/out/target/product/$_device/update*.md5sum ~/Desktop/Builds/update-cm7-$_device-\$(date +%d_%m-%H.%M).md5sum' >> ~/Desktop/build.sh"
 chmod 775 ~/Desktop/build.sh
+}
+fi
+
+if [ "$_incompatible" == "dream" ]; then {
+sh -c "echo 'cd ~/android/system' >> ~/Desktop/build.sh"
+sh -c "echo 'repo sync' >> ~/Desktop/build.sh"
+sh -c "echo '. build/envsetup.sh >> ~/Desktop/build.sh"
+sh -c "echo 'lunch cyanogen_dream_sapphire-eng >> ~/Desktop/build.sh"
+sh -c "echo 'mka bacon >> ~/Desktop/build.sh"
+sh -c "echo 'cp ~/android/system/out/target/product/$_device/update*.zip ~/Desktop/Builds/update-cm7-$_device-\$(date +%d_%m-%H.%M).zip' >> ~/Desktop/build.sh"
+sh -c "echo 'cp ~/android/system/out/target/product/$_device/update*.md5sum ~/Desktop/Builds/update-cm7-$_device-\$(date +%d_%m-%H.%M).md5sum' >> ~/Desktop/build.sh"
+chmod 775 ~/Desktop/build.sh
+}
+fi
 
 echo
 echo "Time to check your build in your Builds folder on your Desktop."
