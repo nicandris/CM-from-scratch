@@ -172,6 +172,8 @@ echo
 
 _udev_v="skip"
 _idev_p="skip"
+_incompatible="0"
+
 
 ##FUNCTIONS
 ##
@@ -317,6 +319,7 @@ case  $vendor in
 		_vendor="htc"
 		_device="dream_sapphire"
 		_udev_v="0bb4"
+                _incompatible="dream"
 		;;
 	 6) echo "Vendor=HTC, Device=Evo 4G"
 		_vendor="htc"
@@ -359,6 +362,7 @@ case  $vendor in
 		_vendor="htc"
 		_device="dream_sapphire"
 		_udev_v="0bb4"
+                _incompatible="dream"
 		;;
 	 13) echo "Vendor=HTC, Device=Passion"
 		_vendor="htc"
@@ -463,7 +467,19 @@ done
 cd ~/android/system/
 repo sync
 
+if [ "$_incompatible" == "0" ]; then {
 . build/envsetup.sh && brunch $_device
+}
+fi
+
+if [ "$_incompatible" == "dream" ]; then {
+cd ~/android/system/
+. build/envsetup.sh
+lunch cyanogen_dream_sapphire-eng
+mka bacon
+}
+fi
+
 
 ##The builds will be copied to the desktop folder Builds. delete these 3 lines if not wanted
 
