@@ -4,7 +4,7 @@ underline=`tput smul`
 nounderline=`tput rmul`
 bolded=`tput bold`
 normal=`tput sgr0`
-
+yyn=`null`
 export user=$(whoami);
 
 echo
@@ -163,6 +163,10 @@ echo -e '\E[37;40m'"\033[1m
 \033[0m"
 
 repo sync -j16
+echo -e '\E[37;40m'"\033[1m Did the repo synchronization completed successfully? (y/n) \033[0m"
+while [ "$yyn" != "y" ]; do
+read yyn
+done
 echo -e '\E[37;40m'"\033[1m
                                 First sync completed! (that took some time didn't it).
 \033[0m"
