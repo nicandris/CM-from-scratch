@@ -163,15 +163,16 @@ echo -e '\E[37;40m'"\033[1m
 \033[0m"
 
 repo sync -j16
-echo -e '\E[37;40m'"\033[1m Did the repo synchronization completed successfully? (y/n) \033[0m"
 while [ "$yyn" != "y" ]; do
+echo -e '\E[37;40m'"\033[1m Did the repo synchronization completed successfully? (y/n) \033[0m"
 read yyn
+echo -e '\E[37;40m'"\033[1m Doublechecking... \033[0m"
+repo sync
 done
 echo -e '\E[37;40m'"\033[1m
                                 First sync completed! (that took some time didn't it).
 \033[0m"
 
-echo
 echo
 
 _udev_v="skip"
