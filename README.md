@@ -5,7 +5,7 @@ This is just a compilation of the wiki/guide given from http://wiki.cyanogenmod.
 
 Thank [@Cyanogen](http://twitter.com/cyanogen) and [#teamdouche](http://search.twitter.com/search?q=%23teamdouche) for the ROMs and CM7
 
-This is gonna *ake some time and HDD space to complete. If you don't have the time to let the computer running or you dont have 7GB on your HDD please quit and try again when requirements (time/space) meet
+This is gonna take some time and HDD space to complete. If you don't have the time to let the computer running or you dont have 7GB on your HDD please quit and try again when requirements (time/space) meet
 
 -------------------------
 
@@ -34,7 +34,7 @@ If you'd like to to contribute to CyanogenMod, checkout our [Gerrit instance.](h
 
 
 ##INSTRUCTIONS
-**First time flashing CM 7 to your N1 (or coming from another ROM)?**
+**First time flashing CM 7 (or coming from another ROM)?**
 
 1. Unlock/root your device and install Clockwork Recovery via ROM Manager or [Amon_RA's recovery image](http://forum.xda-developers.com/showthread.php?t=611829):
 3. Update your radio if necessary
