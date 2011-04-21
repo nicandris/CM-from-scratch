@@ -103,7 +103,7 @@ echo -e '\E[37;40m'"\033[1m
 sudo apt-get install -y git-core gnupg flex bison gperf libsdl1.2-dev libesd0-dev libwxgtk2.6-dev squashfs-tools build-essential zip curl libncurses5-dev zlib1g-dev sun-java6-jdk pngcrush schedtool
 
 ##find if x64 or 32bit (uname -m)
-if [ `uname -m` != "i686" ]; then
+if [ `uname -m | sed 's/x86_//;s/i[3-6]86/32/'` != "32" ]; then
    sudo apt-get install -y g++-multilib lib32z1-dev lib32ncurses5-dev lib32readline5-dev gcc-4.3-multilib g++-4.3-multilib
 fi
 
