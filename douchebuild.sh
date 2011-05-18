@@ -116,7 +116,7 @@ read -n1 -p ""
 echo
 [[ $REPLY = [nN] ]] && 	{
 		##the android-sdk name changes every time google releases a new sdk. inform me to update
-		wget http://dl.google.com/android/android-sdk_r10-linux_x86.tgz;
+		wget http://dl.google.com/android/android-sdk_r11-linux_x86.tgz;
 		tar xvzf android-sdk_r*.tgz;
 		mv android-sdk_r* ~/;
 		cd ~/android-sdk*;
