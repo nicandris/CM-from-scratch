@@ -294,6 +294,7 @@ case  $vendor in
 	echo "Vendor=Generic, Device=Emulator"
 		_vendor="generic"
 		_device="generic"
+;;
  3) HTCdev_menu
 	echo
 	echo -n "Select Device(1-17): "
