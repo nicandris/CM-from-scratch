@@ -192,6 +192,7 @@ ventor_menu() {
 	echo 5.	Samsung
 	echo 6.	Viewsonic
 	echo 7.	ZTE
+	echo 8. Emulator
 }
 
 ## Prints HTC devices selection menu
@@ -289,6 +290,10 @@ case  $vendor in
 		;;
 	esac
 	;;
+ 8) echo "For building Emulator images, use the build.sh script from your desktop"
+	echo "Vendor=Generic, Device=Emulator"
+		_vendor="generic"
+		_device="generic"
  3) HTCdev_menu
 	echo
 	echo -n "Select Device(1-17): "
@@ -522,16 +527,17 @@ sh -c "echo '	echo \"	8.Repo Sync\"	' >> ~/Desktop/build.sh"
 sh -c "echo '	echo \"	9.Push Latest Build to Phone\"	' >> ~/Desktop/build.sh"
 sh -c "echo '	echo \"	10.Update SDK/ADB\"' >> ~/Desktop/build.sh"
 sh -c "echo '	echo \"	11.Make emulator image\"' >> ~/Desktop/build.sh"
-sh -c "echo '	echo \" 12.Remove builds from out dir\"' >> ~/Desktop/build.sh"
+sh -c "echo '	echo \"	12.Remove builds from out dir\"' >> ~/Desktop/build.sh"
 sh -c "echo '	echo \"	-\"' >> ~/Desktop/build.sh"
 sh -c "echo '	echo \"	13.EXIT\"' >> ~/Desktop/build.sh"
 sh -c "echo '	echo ' >> ~/Desktop/build.sh"
+sh -c "echo '	echo \"	If you wish to change device, please run the \"buildshcreator.sh\" script again\"' >> ~/Desktop/build.sh"
 sh -c "echo 'echo' >> ~/Desktop/build.sh"
-sh -c "echo 'echo -n \"Select Option(1-12): \"' >> ~/Desktop/build.sh"
+sh -c "echo 'echo -n \"Select Option(1-13): \"' >> ~/Desktop/build.sh"
 sh -c "echo 'read option' >> ~/Desktop/build.sh"
-sh -c "echo 'while [[ \$option -lt 1 || \$option -gt 12 ]]; do' >> ~/Desktop/build.sh"
+sh -c "echo 'while [[ \$option -lt 1 || \$option -gt 13 ]]; do' >> ~/Desktop/build.sh"
 sh -c "echo '	echo \"Selection ERROR..\"' >> ~/Desktop/build.sh"
-sh -c "echo '	echo -n \"Select Option(1-12): \"' >> ~/Desktop/build.sh"
+sh -c "echo '	echo -n \"Select Option(1-13): \"' >> ~/Desktop/build.sh"
 sh -c "echo '	read option' >> ~/Desktop/build.sh"
 sh -c "echo 'done' >> ~/Desktop/build.sh"
 sh -c "echo 'echo' >> ~/Desktop/build.sh"
@@ -655,7 +661,7 @@ sh -c "echo '	make       ' >> ~/Desktop/build.sh"
 sh -c "echo '	emulator' >> ~/Desktop/build.sh"
 sh -c "echo '	options_menu' >> ~/Desktop/build.sh"
 sh -c "echo '	;;' >> ~/Desktop/build.sh"
-h -c "echo ' 12) echo \"Removing builds from out dir...\"' >> ~/Desktop/build.sh
+sh -c "echo ' 12) echo \"Removing builds from out dir...\"' >> ~/Desktop/build.sh"
 sh -c "echo '	rm ~/android/system/out/target/product/$_device/update*.zip' >> ~/Desktop/build.sh"
 sh -c "echo '	rm ~/android/system/out/target/product/$_device/update*.md5sum' >> ~/Desktop/build.sh"
 sh -c "echo '	;;' >> ~/Desktop/build.sh"
@@ -665,6 +671,7 @@ sh -c "echo 'esac' >> ~/Desktop/build.sh"
 sh -c "echo '}' >> ~/Desktop/build.sh"
 sh -c "echo '' >> ~/Desktop/build.sh"
 sh -c "echo 'options_menu' >> ~/Desktop/build.sh"
+chmod 755 ~/Desktop/build.sh
 chmod 755 ~/Desktop/build.sh
 }
 fi
@@ -690,10 +697,11 @@ sh -c "echo '	echo \"	8.Repo Sync\"	' >> ~/Desktop/build.sh"
 sh -c "echo '	echo \"	9.Push Latest Build to Phone\"	' >> ~/Desktop/build.sh"
 sh -c "echo '	echo \"	10.Update SDK/ADB\"' >> ~/Desktop/build.sh"
 sh -c "echo '	echo \"	11.Make emulator image\"' >> ~/Desktop/build.sh"
-sh -c "echo '	echo \" 12.Remove builds from out dir\"' >> ~/Desktop/build.sh"
+sh -c "echo '	echo \"	12.Remove builds from out dir\"' >> ~/Desktop/build.sh"
 sh -c "echo '	echo \"	-\"' >> ~/Desktop/build.sh"
 sh -c "echo '	echo \"	13.EXIT\"' >> ~/Desktop/build.sh"
 sh -c "echo '	echo ' >> ~/Desktop/build.sh"
+sh -c "echo '	echo \"	If you wish to change device, please run the \"buildshcreator.sh\" script again\"' >> ~/Desktop/build.sh"
 sh -c "echo '' >> ~/Desktop/build.sh"
 sh -c "echo 'echo' >> ~/Desktop/build.sh"
 sh -c "echo 'echo -n \"Select Option(1-13): \"' >> ~/Desktop/build.sh"
@@ -828,7 +836,7 @@ sh -c "echo '	make       ' >> ~/Desktop/build.sh"
 sh -c "echo '	emulator' >> ~/Desktop/build.sh"
 sh -c "echo '	options_menu' >> ~/Desktop/build.sh"
 sh -c "echo '	;;' >> ~/Desktop/build.sh"
-sh -c "echo ' 12) echo \"Removing builds from out dir...\"' >> ~/Desktop/build.sh
+sh -c "echo ' 12) echo \"Removing builds from out dir...\"' >> ~/Desktop/build.sh"
 sh -c "echo '	rm ~/android/system/out/target/product/$_device/update*.zip' >> ~/Desktop/build.sh"
 sh -c "echo '	rm ~/android/system/out/target/product/$_device/update*.md5sum' >> ~/Desktop/build.sh"
 sh -c "echo '	;;' >> ~/Desktop/build.sh"
