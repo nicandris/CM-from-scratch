@@ -192,7 +192,8 @@ ventor_menu() {
 	echo 5.	Samsung
 	echo 6.	Viewsonic
 	echo 7.	ZTE
-	echo 8. Emulator
+	echo 8.	LG
+	echo 9. Emulator
 }
 
 ## Prints HTC devices selection menu
@@ -224,9 +225,24 @@ Samsungdev_menu() {
 	echo 2.	Nexus S
 }
 
+## Prints Motorola devices selection menu
+Motodev_menu() {
+	echo "MOTOROLA DEVICES:"
+	echo 1.	Droid
+	echo 2.	Cliq XT
+}
+
+## Prints LG devices selection menu
+LGdev_menu() {
+	echo "LG DEVICES:"
+	echo 1.	G2x
+	echo 2.	Optimus 2X
+}
+
+
 ##VARIABLES: $_vendor , $_device , $_udev_v
 
-##Show all vendors an select one
+##Show all vendors to select one
 ventor_menu
 echo
 echo -n "Select Vendor(1-7): "
@@ -239,6 +255,7 @@ done
 echo
 
 case  $vendor in
+
  1) echo "Vendor=Commitiva, Device=Z71"
 	_vendor="Commtiva"
 	_device="z71"
@@ -249,53 +266,9 @@ case  $vendor in
 	_device="one"
 	_udev_v="skip"
 	;;
- 4) echo "Vendor=Motorola, Device=Droid"
-	_vendor="motorola"
-	_device="sholes"
-	_udev_v="22b8"
-	;;
- 6) echo "Vendor=Viewsonic, Device=G Tablet"
-	_vendor="nvidia"
-	_device="harmony"
-	_udev_v="0955"
-	;;
- 7) echo "Vendor=ZTE, Device=Blade"
-	_vendor="zte"
-	_device="blade"
-	_udev_v="19D2"
-	;;
- 5) Samsungdev_menu
-	echo
-	echo -n "Select Device(1-2): "
-	read device
-	while [[ $device -lt 1 || $device -gt 2 ]]; do
-		echo "Selection ERROR.."
-		echo -n "Select Device(1-2): "
-		read device
-	done
-	echo
-	case $device in
-	 1) echo "Vendor=Samsung, Device=Galaxy S"
-		_vendor="samsung"
-		_device="vibrant"
-		_udev_v="skip"
-		;;
-	 2) echo "Vendor=Samsung, Device=Nexus S"
-		_vendor="samsung"
-		_device="crespo"
-		_udev_v="skip"
-		sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"18d1\", ATTRS{idProduct}==\"4e21\", MODE=\"0666\", OWNER=\"$user\" #Normal nexus s' >> /etc/udev/rules.d/51-android.rules"
-		sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"18d1\", ATTRS{idProduct}==\"4e22\", MODE=\"0666\", OWNER=\"$user\" #Debug & Recovery nexus s' >> /etc/udev/rules.d/51-android.rules"
-		sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"18d1\", ATTRS{idProduct}==\"4e20\", MODE=\"0666\", OWNER=\"$user\" #Fastboot nexus s' >> /etc/udev/rules.d/51-android.rules"
-		;;
-	esac
-	;;
- 8) echo "For building Emulator images, use the build.sh script from your desktop"
-	echo "Vendor=Generic, Device=Emulator"
-		_vendor="generic"
-		_device="generic"
-;;
- 3) HTCdev_menu
+
+## Prints HTC devices selection menu
+3) HTCdev_menu
 	echo
 	echo -n "Select Device(1-17): "
 	read device
@@ -407,6 +380,97 @@ case  $vendor in
 		;;	
            esac
 	;;
+
+## Prints Motorolla devices selection menu
+4) Motodev_menu
+	echo
+	echo -n "Select Device(1-2): "
+	read device
+	while [[ $device -lt 1 || $device -gt 2 ]]; do
+		echo "Selection ERROR.."
+		echo -n "Select Device(1-2): "
+		read device
+	done
+	echo
+	case $device in
+	 1) echo "Vendor=Motorola, Device=Droid"
+		_vendor="motorola"
+		_device="sholes"
+		_udev_v="22b8"
+		;;
+	 2) echo "Vendor=Motorola, Device=Cliq XT"
+		_vendor="motorola"
+		_device="zeppelin"
+		_udev_v="skip"
+		;;
+	esac
+	;; 
+
+
+ 5) Samsungdev_menu
+	echo
+	echo -n "Select Device(1-2): "
+	read device
+	while [[ $device -lt 1 || $device -gt 2 ]]; do
+		echo "Selection ERROR.."
+		echo -n "Select Device(1-2): "
+		read device
+	done
+	echo
+	case $device in
+	 1) echo "Vendor=Samsung, Device=Galaxy S"
+		_vendor="samsung"
+		_device="vibrant"
+		_udev_v="skip"
+		;;
+	 2) echo "Vendor=Samsung, Device=Nexus S"
+		_vendor="samsung"
+		_device="crespo"
+		_udev_v="skip"
+		sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"18d1\", ATTRS{idProduct}==\"4e21\", MODE=\"0666\", OWNER=\"$user\" #Normal nexus s' >> /etc/udev/rules.d/51-android.rules"
+		sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"18d1\", ATTRS{idProduct}==\"4e22\", MODE=\"0666\", OWNER=\"$user\" #Debug & Recovery nexus s' >> /etc/udev/rules.d/51-android.rules"
+		sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"18d1\", ATTRS{idProduct}==\"4e20\", MODE=\"0666\", OWNER=\"$user\" #Fastboot nexus s' >> /etc/udev/rules.d/51-android.rules"
+		;;
+	esac
+	;;
+ 6) echo "Vendor=Viewsonic, Device=G Tablet"
+	_vendor="nvidia"
+	_device="harmony"
+	_udev_v="0955"
+	;;
+ 7) echo "Vendor=ZTE, Device=Blade"
+	_vendor="zte"
+	_device="blade"
+	_udev_v="19D2"
+	;;
+ 8) LGdev_menu
+	echo
+	echo -n "Select Device(1-2): "
+	read device
+	while [[ $device -lt 1 || $device -gt 2 ]]; do
+		echo "Selection ERROR.."
+		echo -n "Select Device(1-2): "
+		read device
+	done
+	echo
+	case $device in
+	 1) echo "Vendor=LG, Device=G2x"
+		_vendor="lge"
+		_device="p999"
+		_udev_v="skip"
+		;;
+	 2) echo "Vendor=LG, Device=Optimus 2X"
+		_vendor="lge"
+		_device="p990"
+		_udev_v="skip"
+		;;
+	esac
+	;; 
+ 9) echo "For building Emulator images, use the build.sh script from your desktop"
+	echo "Vendor=Generic, Device=Emulator"
+		_vendor="generic"
+		_device="generic"
+;;
 esac
 
 
