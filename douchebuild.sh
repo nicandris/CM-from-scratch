@@ -223,6 +223,8 @@ Samsungdev_menu() {
 	echo "SAMSUNG DEVICES:"
 	echo 1.	Galaxy S
 	echo 2.	Nexus S
+	echo 3.	Captivate
+	echo 4.	Vibrant
 }
 
 ## Prints Motorola devices selection menu
@@ -409,11 +411,11 @@ case  $vendor in
 
  5) Samsungdev_menu
 	echo
-	echo -n "Select Device(1-2): "
+	echo -n "Select Device(1-4): "
 	read device
-	while [[ $device -lt 1 || $device -gt 2 ]]; do
+	while [[ $device -lt 1 || $device -gt 4 ]]; do
 		echo "Selection ERROR.."
-		echo -n "Select Device(1-2): "
+		echo -n "Select Device(1-4): "
 		read device
 	done
 	echo
@@ -430,6 +432,16 @@ case  $vendor in
 		sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"18d1\", ATTRS{idProduct}==\"4e21\", MODE=\"0666\", OWNER=\"$user\" #Normal nexus s' >> /etc/udev/rules.d/51-android.rules"
 		sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"18d1\", ATTRS{idProduct}==\"4e22\", MODE=\"0666\", OWNER=\"$user\" #Debug & Recovery nexus s' >> /etc/udev/rules.d/51-android.rules"
 		sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"18d1\", ATTRS{idProduct}==\"4e20\", MODE=\"0666\", OWNER=\"$user\" #Fastboot nexus s' >> /etc/udev/rules.d/51-android.rules"
+		;;
+	 3) echo "Vendor=Samsung, Device=Captivate"
+		_vendor="samsung"
+		_device="captivatemtd"
+		_udev_v="skip"
+		;;
+	 4) echo "Vendor=Samsung, Device=Vibrant"
+		_vendor="samsung"
+		_device="vibrantmtd"
+		_udev_v="skip"
 		;;
 	esac
 	;;
