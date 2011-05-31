@@ -183,7 +183,8 @@ _incompatible="0"
 ##FUNCTIONS
 ##
 ##	Prints vendors selection menu
-ventor_menu() {
+
+vendor_menu() {
     echo "VENDORS:"
 	echo 1.	Commitiva
 	echo 2.	Geeksphone
@@ -193,7 +194,8 @@ ventor_menu() {
 	echo 6.	Viewsonic
 	echo 7.	ZTE
 	echo 8.	LG
-	echo 9. Emulator
+	echo 9. Barnes & Noble
+	echo 10. Emulator
 }
 
 ## Prints HTC devices selection menu
@@ -245,7 +247,7 @@ LGdev_menu() {
 ##VARIABLES: $_vendor , $_device , $_udev_v
 
 ##Show all vendors to select one
-ventor_menu
+vendor_menu
 echo
 echo -n "Select Vendor(1-7): "
 read vendor
@@ -478,7 +480,12 @@ case  $vendor in
 		;;
 	esac
 	;; 
- 9) echo "For building Emulator images, use the build.sh script from your desktop"
+ 9) echo "Vendor=Barnes & Noble, Device=Nook Color"
+	_vendor="bn"
+	_device="encore"
+	_udev_v="skip"
+	;;
+ 10) echo "For building Emulator images, use the build.sh script from your desktop"
 	echo "Vendor=Generic, Device=Emulator"
 		_vendor="generic"
 		_device="generic"
