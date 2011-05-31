@@ -483,7 +483,7 @@ case  $vendor in
  9) echo "Vendor=Barnes & Noble, Device=Nook Color"
 	_vendor="bn"
 	_device="encore"
-	_udev_v="skip"
+	_udev_v="18d1"
 	;;
  10) echo "For building Emulator images, use the build.sh script from your desktop"
 	echo "Vendor=Generic, Device=Emulator"
