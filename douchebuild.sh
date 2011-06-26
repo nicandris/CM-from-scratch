@@ -194,7 +194,7 @@ vendor_menu() {
 	echo 6.	Viewsonic
 	echo 7.	ZTE
 	echo 8.	LG
-	echo 9. Barnes & Noble
+	echo "9. Barnes & Noble"
 	echo 10. Emulator
 }
 
@@ -249,11 +249,11 @@ LGdev_menu() {
 ##Show all vendors to select one
 vendor_menu
 echo
-echo -n "Select Vendor(1-7): "
+echo -n "Select Vendor(1-10): "
 read vendor
-while [[ $vendor -lt 1 || $vendor -gt 7 ]]; do
+while [[ $vendor -lt 1 || $vendor -gt107 ]]; do
 	echo "Selection ERROR.."
-	echo -n "Select Vendor(1-7): "
+	echo -n "Select Vendor(1-10): "
 	read vendor
 done
 echo
