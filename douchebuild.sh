@@ -251,7 +251,7 @@ vendor_menu
 echo
 echo -n "Select Vendor(1-10): "
 read vendor
-while [[ $vendor -lt 1 || $vendor -gt107 ]]; do
+while [[ $vendor -lt 1 || $vendor -gt 10 ]]; do
 	echo "Selection ERROR.."
 	echo -n "Select Vendor(1-10): "
 	read vendor
