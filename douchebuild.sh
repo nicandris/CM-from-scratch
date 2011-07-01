@@ -483,8 +483,13 @@ case  $vendor in
  9) echo "Vendor=Barnes & Noble, Device=Nook Color"
 	_vendor="bn"
 	_device="encore"
-	_udev_v="18d1"
+	_udev_v="skip"
+sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"2080\", ATTRS{idProduct}==\"0ff9\", MODE=\"0660\", OWNER=\"$user\" #Normal encore' >> /etc/udev/rules.d/51-android.rules"
+sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"2080\", ATTRS{idProduct}==\"0fff\", MODE=\"0660\", OWNER=\"$user\" #Fastboot encore' >> /etc/udev/rules.d/51-android.rules"
+sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"2080\", ATTRS{idProduct}==\"skip\", MODE=\"0660\", OWNER=\"$user\" #Debug & Recovery encore' >> /etc/udev/rules.d/51-android.rules"
+mkdir -p ~/.android && echo 0x2080 > ~/.android/adb_usb.ini
 	;;
+
  10) echo "For building Emulator images, use the build.sh script from your desktop"
 	echo "Vendor=Generic, Device=Emulator"
 		_vendor="generic"
