@@ -218,6 +218,7 @@ HTCdev_menu() {
 	echo 15.Vision
 	echo 16.Wildfire
         echo 17.Leo
+        echo 18.Incredible 2
 }
 
 ## Prints Samsung devices selection menu
