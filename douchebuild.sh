@@ -274,11 +274,11 @@ case  $vendor in
 ## Prints HTC devices selection menu
 3) HTCdev_menu
 	echo
-	echo -n "Select Device(1-17): "
+	echo -n "Select Device(1-18): "
 	read device
-	while [[ $device -lt 1 || $device -gt 17 ]]; do
+	while [[ $device -lt 1 || $device -gt 18 ]]; do
 		echo "Selection ERROR.."
-		echo -n "Select Device(1-17): "
+		echo -n "Select Device(1-18): "
 		read device
 	done
 	echo
@@ -381,7 +381,14 @@ case  $vendor in
 		_vendor="htc"
 		_device="leo"
 		_udev_v="0bb4"
-		;;	
+		;;
+         18) echo "Vendor=HTC, Device=Incredible2"
+		_vendor="htc"
+		_device="vivow"
+		_udev_v="skip"
+		sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"0bb4\", ATTRS{idProduct}==\"0cad\", MODE=\"0666\", Owner=\"$user\" #Normal Inc2' >> /etc/udev/rules.d/51-android.rules"
+		sudo sh -c "echo 'SUBSYSTEM==\"usb\", ATTRS{idVendor}==\"0bb4\", ATTRS{idProduct}==\"0c94\", MODE=\"0666\", OWNER=\"$user\" #Bootloader Inc2' >> /etc/udev/rules.d/51-android.rules"
+		sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"0bb4\", ATTRS{idProduct}==\"0ff0\", MODE=\"0666\", OWNER=\"$user\" Fastboot Inc2' >> /etc/udev/rules.d/51-android.rules"	
            esac
 	;;
 
