@@ -598,7 +598,7 @@ done
 
 cd ~/android/system/
 repo sync
-
+USE_CCACHE=1 mka
 if [ "$_incompatible" == "0" ]; then {
 . build/envsetup.sh && brunch $_device
 }
@@ -687,6 +687,7 @@ sh -c "echo '	make clean' >> ~/Desktop/build.sh"
 sh -c "echo '	make clobber' >> ~/Desktop/build.sh"
 sh -c "echo '	echo \"Building...\"' >> ~/Desktop/build.sh"
 sh -c "echo '	repo sync' >> ~/Desktop/build.sh"
+sh -c "echo '	USE_CCACHE=1' >> ~/Desktop/build.sh"
 sh -c "echo '	. build/envsetup.sh && brunch $_device' >> ~/Desktop/build.sh"
 sh -c "echo '	cd ~/android/system/out/target/product/$_device/system/' >> ~/Desktop/build.sh"
 sh -c "echo '	Day=\`date +%d\`' >> ~/Desktop/build.sh"
@@ -715,6 +716,7 @@ sh -c "echo '	;;' >> ~/Desktop/build.sh"
 sh -c "echo ' 6) echo \"Building Rom...\"' >> ~/Desktop/build.sh"
 sh -c "echo '	cd ~/android/system' >> ~/Desktop/build.sh"
 sh -c "echo '	repo sync' >> ~/Desktop/build.sh"
+sh -c "echo '	USE_CCACHE=1' >> ~/Desktop/build.sh"
 sh -c "echo '	. build/envsetup.sh && brunch $_device' >> ~/Desktop/build.sh"
 sh -c "echo '	cd ~/android/system/out/target/product/$_device/system/' >> ~/Desktop/build.sh"
 sh -c "echo '	Day=\`date +%d\`' >> ~/Desktop/build.sh"
@@ -859,6 +861,7 @@ sh -c "echo '	make clean' >> ~/Desktop/build.sh"
 sh -c "echo '	make clobber' >> ~/Desktop/build.sh"
 sh -c "echo '	echo \"Building...\"' >> ~/Desktop/build.sh"
 sh -c "echo '	repo sync' >> ~/Desktop/build.sh"
+sh -c "echo '	USE_CCACHE=1' >> ~/Desktop/build.sh"
 sh -c "echo '	. build/envsetup.sh' >> ~/Desktop/build.sh"
 sh -c "echo 'lunch cyanogen_dream_sapphire-eng >> ~/Desktop/build.sh"
 sh -c "echo 'mka bacon >> ~/Desktop/build.sh"
@@ -889,9 +892,10 @@ sh -c "echo '	;;' >> ~/Desktop/build.sh"
 sh -c "echo ' 6) echo \"Building Rom...\"' >> ~/Desktop/build.sh"
 sh -c "echo '	cd ~/android/system' >> ~/Desktop/build.sh"
 sh -c "echo '	repo sync' >> ~/Desktop/build.sh"
+sh -c "echo '	USE_CCACHE=1' >> ~/Desktop/build.sh"
 sh -c "echo '	. build/envsetup.sh' >> ~/Desktop/build.sh"
-sh -c "echo 'lunch cyanogen_dream_sapphire-eng >> ~/Desktop/build.sh"
-sh -c "echo 'mka bacon >> ~/Desktop/build.sh"
+sh -c "echo '   lunch cyanogen_dream_sapphire-eng >> ~/Desktop/build.sh"
+sh -c "echo '   mka bacon >> ~/Desktop/build.sh"
 sh -c "echo '	cd ~/android/system/out/target/product/$_device/system/' >> ~/Desktop/build.sh"
 sh -c "echo '	Day=\`date +%d\`' >> ~/Desktop/build.sh"
 sh -c "echo '	Date=\`date +%D\`' >> ~/Desktop/build.sh"
