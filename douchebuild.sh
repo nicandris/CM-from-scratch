@@ -237,6 +237,7 @@ Motodev_menu() {
 	echo "MOTOROLA DEVICES:"
 	echo 1.	Droid
 	echo 2.	Cliq XT
+	echo 2.	Droid X
 }
 
 ## Prints LG devices selection menu
@@ -398,11 +399,11 @@ case  $vendor in
 ## Prints Motorolla devices selection menu
 4) Motodev_menu
 	echo
-	echo -n "Select Device(1-2): "
+	echo -n "Select Device(1-3): "
 	read device
-	while [[ $device -lt 1 || $device -gt 2 ]]; do
+	while [[ $device -lt 1 || $device -gt 3 ]]; do
 		echo "Selection ERROR.."
-		echo -n "Select Device(1-2): "
+		echo -n "Select Device(1-3): "
 		read device
 	done
 	echo
@@ -416,6 +417,12 @@ case  $vendor in
 		_vendor="motorola"
 		_device="zeppelin"
 		_udev_v="skip"
+		;;
+	 2) echo "Vendor=Motorola, Device=Droid X"
+		_vendor="motorola"
+		_device="shadow"
+		_udev_v="skip"
+                sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"22b8\", MODE=\"0666\", OWNER=\"$user\" #Normal droid x' >> /etc/udev/rules.d/51-android.rules"
 		;;
 	esac
 	;; 
