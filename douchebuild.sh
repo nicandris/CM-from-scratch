@@ -598,7 +598,7 @@ done
 
 cd ~/android/system/
 repo sync
-USE_CCACHE=1 mka
+USE_CCACHE=1
 if [ "$_incompatible" == "0" ]; then {
 . build/envsetup.sh && brunch $_device
 }
