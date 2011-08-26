@@ -618,7 +618,7 @@ fi
 if [[ -d ~/Desktop/Builds ]] ; then
             echo '~/Desktop/Builds' 'Dir Exists'
         else
-            mkdir ~/Desktop/Builds
+            mkdir -p ~/Desktop/Builds
         fi
 
 
