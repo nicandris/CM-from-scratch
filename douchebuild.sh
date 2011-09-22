@@ -219,6 +219,7 @@ HTCdev_menu() {
 	echo 16.Wildfire
         echo 17.Leo
         echo 18.Incredible 2
+	echo "19.Tattoo/Click"
 }
 
 ## Prints Samsung devices selection menu
@@ -278,11 +279,11 @@ case  $vendor in
 ## Prints HTC devices selection menu
 3) HTCdev_menu
 	echo
-	echo -n "Select Device(1-18): "
+	echo -n "Select Device(1-19): "
 	read device
-	while [[ $device -lt 1 || $device -gt 18 ]]; do
+	while [[ $device -lt 1 || $device -gt 19 ]]; do
 		echo "Selection ERROR.."
-		echo -n "Select Device(1-18): "
+		echo -n "Select Device(1-19): "
 		read device
 	done
 	echo
@@ -393,6 +394,11 @@ case  $vendor in
 		sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"0bb4\", ATTRS{idProduct}==\"0cad\", MODE=\"0666\", Owner=\"$user\" #Normal Inc2' >> /etc/udev/rules.d/51-android.rules"
 		sudo sh -c "echo 'SUBSYSTEM==\"usb\", ATTRS{idVendor}==\"0bb4\", ATTRS{idProduct}==\"0c94\", MODE=\"0666\", OWNER=\"$user\" #Bootloader Inc2' >> /etc/udev/rules.d/51-android.rules"
 		sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"0bb4\", ATTRS{idProduct}==\"0ff0\", MODE=\"0666\", OWNER=\"$user\" Fastboot Inc2' >> /etc/udev/rules.d/51-android.rules"	
+         19) echo "Vendor=HTC, Device=Tattoo"
+		_vendor="htc"
+		_device="click"
+		_udev_v="0bb4"
+		;;
            esac
 	;;
 
@@ -651,7 +657,7 @@ sh -c "echo '	echo \"	10.Update SDK/ADB\"' >> ~/Desktop/build.sh"
 sh -c "echo '	echo \"	11.Make emulator image\"' >> ~/Desktop/build.sh"
 sh -c "echo '	echo \"	12.Remove builds from out dir\"' >> ~/Desktop/build.sh"
 sh -c "echo '	echo \"	-\"' >> ~/Desktop/build.sh"
-sh -c "echo '	echo \"	13.EXIT\"' >> ~/Desktop/build.sh"
+sh -c "echo '	echo \"	0.EXIT\"' >> ~/Desktop/build.sh"
 sh -c "echo '	echo ' >> ~/Desktop/build.sh"
 sh -c "echo '	echo \"	If you wish to change device, please run the \"buildshcreator.sh\" script again\"' >> ~/Desktop/build.sh"
 sh -c "echo 'echo' >> ~/Desktop/build.sh"
@@ -790,7 +796,7 @@ sh -c "echo '	rm ~/android/system/out/target/product/$_device/update*.zip' >> ~/
 sh -c "echo '	rm ~/android/system/out/target/product/$_device/update*.md5sum' >> ~/Desktop/build.sh"
 sh -c "echo '	options_menu' >> ~/Desktop/build.sh"
 sh -c "echo '	;;' >> ~/Desktop/build.sh"
-sh -c "echo ' 13) exit' >> ~/Desktop/build.sh"
+sh -c "echo ' 0) exit' >> ~/Desktop/build.sh"
 sh -c "echo '' >> ~/Desktop/build.sh"
 sh -c "echo 'esac' >> ~/Desktop/build.sh"
 sh -c "echo '}' >> ~/Desktop/build.sh"
@@ -824,7 +830,7 @@ sh -c "echo '	echo \"	10.Update SDK/ADB\"' >> ~/Desktop/build.sh"
 sh -c "echo '	echo \"	11.Make emulator image\"' >> ~/Desktop/build.sh"
 sh -c "echo '	echo \"	12.Remove builds from out dir\"' >> ~/Desktop/build.sh"
 sh -c "echo '	echo \"	-\"' >> ~/Desktop/build.sh"
-sh -c "echo '	echo \"	13.EXIT\"' >> ~/Desktop/build.sh"
+sh -c "echo '	echo \"	0.EXIT\"' >> ~/Desktop/build.sh"
 sh -c "echo '	echo ' >> ~/Desktop/build.sh"
 sh -c "echo '	echo \"	If you wish to change device, please run the \"buildshcreator.sh\" script again\"' >> ~/Desktop/build.sh"
 sh -c "echo '' >> ~/Desktop/build.sh"
@@ -968,7 +974,7 @@ sh -c "echo '	rm ~/android/system/out/target/product/$_device/update*.zip' >> ~/
 sh -c "echo '	rm ~/android/system/out/target/product/$_device/update*.md5sum' >> ~/Desktop/build.sh"
 sh -c "echo '	options_menu' >> ~/Desktop/build.sh"
 sh -c "echo '	;;' >> ~/Desktop/build.sh"
-sh -c "echo ' 13) exit' >> ~/Desktop/build.sh"
+sh -c "echo ' 0) exit' >> ~/Desktop/build.sh"
 sh -c "echo '' >> ~/Desktop/build.sh"
 sh -c "echo 'esac' >> ~/Desktop/build.sh"
 sh -c "echo '}' >> ~/Desktop/build.sh"
