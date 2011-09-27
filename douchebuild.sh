@@ -116,7 +116,7 @@ read -n1 -p ""
 echo
 [[ $REPLY = [nN] ]] && 	{
 		##the android-sdk name changes every time google releases a new sdk. inform me to update
-		wget http://dl.google.com/android/android-sdk_r11-linux_x86.tgz;
+		wget http://dl.google.com/android/android-sdk_r13-linux_x86.tgz;
 		tar xvzf android-sdk_r*.tgz;
 		mv android-sdk_r* ~/;
 		cd ~/android-sdk*;
@@ -150,14 +150,14 @@ if [[ -d ~/android/system ]] ; then
 
 
 ##get repo
-curl http://android.git.kernel.org/repo > ~/bin/repo
+curl https://raw.github.com/android/tools_repo/master/repo > ~/bin/repo
 chmod a+x ~/bin/repo
 echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
 export PATH=$PATH:$HOME/bin
 
 cd ~/android/system/
 ##initialize repo
-repo init -u git://github.com/CyanogenMod/android.git -b gingerbread
+repo init -u git://github.com/CyanogenMod/android.git -b gingerbread --repo-url=git://github.com/android/tools_repo.git
 echo -e '\E[37;40m'"\033[1m
                                 Repo initialized! (Please note that this is gonna take emmmm... SOOOOOOOOME time to complete.
 \033[0m"
