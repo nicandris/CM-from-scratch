@@ -231,6 +231,8 @@ Samsungdev_menu() {
 	echo 4.	Vibrant
 	echo 5.	Galaxy S II
 	echo 6.	Fascinate
+	echo 7.	Nexus S 4G
+
 }
 
 ## Prints Motorola devices selection menu
@@ -437,11 +439,11 @@ case  $vendor in
 
  5) Samsungdev_menu
 	echo
-	echo -n "Select Device(1-6): "
+	echo -n "Select Device(1-7): "
 	read device
-	while [[ $device -lt 1 || $device -gt 6 ]]; do
+	while [[ $device -lt 1 || $device -gt 7 ]]; do
 		echo "Selection ERROR.."
-		echo -n "Select Device(1-6): "
+		echo -n "Select Device(1-7): "
 		read device
 	done
 	echo
@@ -485,6 +487,15 @@ case  $vendor in
 		sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"04e8\", ATTRS{idProduct}==\"685e\", MODE=\"0666\", OWNER=\"$user\" #Debug & Recovery Fascinate' >> /etc/udev/rules.d/51-android.rules"
 		sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"04e8\", ATTRS{idProduct}==\"685e\", MODE=\"0666\", OWNER=\"$user\" #Fastboot Fascinate' >> /etc/udev/rules.d/51-android.rules"
 		;;
+	7) echo "Vendor=Samsung, Device=Nexus S 4G"
+		_vendor="samsung"
+		_device="crespo4g"
+		_udev_v="skip"
+		sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"18d1\", ATTRS{idProduct}==\"4e21\", MODE=\"0666\", OWNER=\"$user\" #Normal nexus s' >> /etc/udev/rules.d/51-android.rules"
+		sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"18d1\", ATTRS{idProduct}==\"4e22\", MODE=\"0666\", OWNER=\"$user\" #Debug & Recovery nexus s' >> /etc/udev/rules.d/51-android.rules"
+		sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"18d1\", ATTRS{idProduct}==\"4e20\", MODE=\"0666\", OWNER=\"$user\" #Fastboot nexus s' >> /etc/udev/rules.d/51-android.rules"
+		;;
+		
 	esac
 	;;
  6) echo "Vendor=Viewsonic, Device=G Tablet"
