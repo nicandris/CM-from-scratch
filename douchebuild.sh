@@ -162,7 +162,7 @@ echo -e '\E[37;40m'"\033[1m
                                 Repo initialized! (Please note that this is gonna take emmmm... SOOOOOOOOME time to complete.
 \033[0m"
 
-repo sync -j16
+repo sync -j8
 while [ "$yyn" != "y" ]; do
 echo -e '\E[37;40m'"\033[1m Did the repo synchronization completed successfully? (y/n) \033[0m"
 read yyn
@@ -450,7 +450,7 @@ case  $vendor in
 	case $device in
 	 1) echo "Vendor=Samsung, Device=Galaxy S"
 		_vendor="samsung"
-		_device="vibrant"
+		_device="galaxysmtd"
 		_udev_v="skip"
 		;;
 	 2) echo "Vendor=Samsung, Device=Nexus S"
