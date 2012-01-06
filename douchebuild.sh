@@ -27,13 +27,21 @@ CyanogenMod is a free, community built distribution of Android 2.3 (Gingerbread)
 
 \033[0m"
 echo "
-This is an AOSP-based build with extra contributions from many people which you can use without any type of Google applications. I found a link from some other project that can be used to restore the Google parts, which can be found below or elsewhere in the thread. I've still included the various hardware-specific code, which seems to be slowly being open-sourced anyway.
+This is an AOSP-based build with extra contributions from many people
+which you can use without any type of Google applications. I found a
+link from some other project that can be used to restore the Google
+parts, which can be found below or elsewhere in the thread. I've still
+included the various hardware-specific code, which seems to be slowly
+being open-sourced anyway.
 
-Visit the CHANGELOG for a full list of changes and features! http://cyanogenmod.com/changelog
+Visit the CHANGELOG for a full list of changes and features!
+http://cyanogenmod.com/changelog
 
-All source code is available at the CyanogenMod Github! http://github.com/CyanogenMod
+All source code is available at the CyanogenMod Github!
+http://github.com/CyanogenMod
 
-If you'd like to to contribute to CyanogenMod, checkout our Gerrit instance. http://review.cyanogenmod.com/
+If you'd like to to contribute to CyanogenMod, checkout our Gerrit
+instance. http://review.cyanogenmod.com/
 
 INSTRUCTIONS:
 - First time flashing CM 7 to your N1 (or coming from another ROM)?
@@ -54,22 +62,28 @@ HOW TO REPORT BUGS OR PROBLEMS?
 - Pastebin links preferred
 - Please use the issue tracker whenever possible!
 
-Please visit the CyanogenMod Wiki (http://wiki.cyanogenmod.com/) for step-by-step installation walkthroughs and tons of other useful information.
+Please visit the CyanogenMod Wiki (http://wiki.cyanogenmod.com/) for
+step-by-step installation walkthroughs and tons of other useful
+information.
 
-The preferred method of installation is via ROM Manager, or you can head over to the CM Forums for manual downloads.
+The preferred method of installation is via ROM Manager, or you can
+head over to the CM Forums for manual downloads.
 
-Thank you to EVERYONE involved in helping with testing, coding, debugging and documenting! Enjoy!
+Thank you to EVERYONE involved in helping with testing, coding,
+debugging and documenting! Enjoy!
 
 -------------------------"
 echo -e '\E[37;44m'"\033[1m
-${underline}            This script is only needed to be runed the first time you want to install all the stuff on your computer. If you have already done that please use the build.sh script from your desktop\033[0m"
+${underline}            This script only needs to be run the very first time you want to install all the CM dependencies on your computer.  If you have already done that, then stop now, and instead run the build.sh script from your desktop (e.g. - ~/Desktop/build.sh)\033[0m"
 echo "
 This is just a compilation of the wiki/guide given from http://wiki.cyanogenmod.com
 
 Thank @Cyanogen and #teamdouche for the ROMs and CM7${nounderline}
 
-This is gonna take some time and HDD space to complete. If you don't have the time to let the computer running or you dont have 7GB on your HDD please quit and try again when requirements (time/space) meet
-"
+This is gonna take some time and HDD space to complete.  If you don't
+have the time to leave your computer running or you don't have 7GB on
+your HDD, please quit and try again when the requirements (time/space)
+meet the resources you have available. "
 
 echo "
 Are we clear? (y/n)"
@@ -77,9 +91,6 @@ read _clear
 if [ "$_clear" != "y" ]; then echo -e '\E[37;40m'"\033[1m
 You sir/madam are an #epicfail (jk). Please read the above and try again.
 \033[0m"; exit 0; fi
-
-
-
 
 
 ##http://wiki.cyanogenmod.com/index.php?title=Building_from_source
@@ -100,11 +111,14 @@ echo -e '\E[37;40m'"\033[1m
                                 Installing dependencies!.
 \033[0m"
 
-sudo apt-get install -y git-core gnupg flex bison gperf libsdl1.2-dev libesd0-dev libwxgtk2.6-dev squashfs-tools build-essential zip curl libncurses5-dev zlib1g-dev sun-java6-jdk pngcrush schedtool
+DEPENDENCIES="git-core gnupg flex bison gperf libsdl1.2-dev libesd0-dev libwxgtk2.6-dev squashfs-tools build-essential zip curl libncurses5-dev zlib1g-dev sun-java6-jdk pngcrush schedtool"
+
+sudo apt-get install -y ${DEPENDENCIES}
 
 ##find if x64 or 32bit (uname -m)
 if [ `uname -m | sed 's/x86_//;s/i[3-6]86/32/'` != "32" ]; then
-   sudo apt-get install -y g++-multilib lib32z1-dev lib32ncurses5-dev lib32readline5-dev gcc-4.3-multilib g++-4.3-multilib
+   MLIBDEPS="g++-multilib lib32z1-dev lib32ncurses5-dev lib32readline5-dev gcc-4.3-multilib g++-4.3-multilib"
+   sudo apt-get install -y ${MLIBDEPS}
 fi
 
 ##get the sdk/adb/fastboot
@@ -131,10 +145,10 @@ echo
 		sudo chmod 755 /usr/bin/adb;
 		sudo chmod 755 /usr/bin/fastboot;
 echo -e '\E[37;40m'"\033[1m
-                                First step Done!.
+                                ADB/Fastboot download complete!.
 \033[0m"
 
-} || echo "You already have the files, skiped";
+} || echo "You already have the files, skipped";
 
 echo
 echo
@@ -143,10 +157,10 @@ cd
 mkdir -p ~/bin
 
 if [[ -d ~/android/system ]] ; then
-            echo '~/android/system' 'Dir Exists'
-        else
-            mkdir -p ~/android/system
-        fi
+    echo '~/android/system' 'Directory Already Exists'
+else
+    mkdir -p ~/android/system
+fi
 
 
 ##get repo
@@ -240,7 +254,7 @@ Motodev_menu() {
 	echo "MOTOROLA DEVICES:"
 	echo 1.	Droid
 	echo 2.	Cliq XT
-	echo 2.	Droid X
+	echo 3.	Droid X
 }
 
 ## Prints LG devices selection menu
@@ -256,89 +270,90 @@ LGdev_menu() {
 ##Show all vendors to select one
 vendor_menu
 echo
-echo -n "Select Vendor(1-10): "
+echo -n "Select Vendor (1-10, or vendor name): "
 read vendor
-while [[ $vendor -lt 1 || $vendor -gt 10 ]]; do
-	echo "Selection ERROR.."
-	echo -n "Select Vendor(1-10): "
-	read vendor
-done
-echo
+
+# if not valid, then it'll be caught in the vendor case
+#while [[ $vendor -lt 1 || $vendor -gt 10 ]]; do
+#	echo "Selection ERROR..."
+#	echo -n "Select Vendor(1-10): "
+#	read vendor
+#done
+#echo
 
 case  $vendor in
-
- 1) echo "Vendor=Commitiva, Device=Z71"
+    1|Commitiva) echo "Vendor=Commitiva, Device=Z71"
 	_vendor="Commtiva"
 	_device="z71"
 	_udev_v="skip"
 	;;
- 2) echo "Vendor=Geeksphone, Device=One"
+    2|Geeksphone) echo "Vendor=Geeksphone, Device=One"
 	_vendor="geeksphone"
 	_device="one"
 	_udev_v="skip"
 	;;
 
 ## Prints HTC devices selection menu
-3) HTCdev_menu
+    3|HTC) HTCdev_menu
 	echo
 	echo -n "Select Device(1-19): "
 	read device
 	while [[ $device -lt 1 || $device -gt 19 ]]; do
-		echo "Selection ERROR.."
-		echo -n "Select Device(1-19): "
-		read device
+	    echo "Selection ERROR.."
+	    echo -n "Select Device(1-19): "
+	    read device
 	done
 	echo
 	case $device in
-	 1) echo "Vendor=HTC, Device=Ace"
+	    1) echo "Vendor=HTC, Device=Ace"
 		_vendor="htc"
 		_device="ace"
 		_udev_v="0bb4"
 		;;
-	 2) echo "Vendor=HTC, Device=Aria"
+	    2) echo "Vendor=HTC, Device=Aria"
 		_vendor="htc"
 		_device="liberty"
 		_udev_v="0bb4"
 		;;
-	 3) echo "Vendor=HTC, Device=Desire CDMA"
+	    3) echo "Vendor=HTC, Device=Desire CDMA"
 		_vendor="htc"
 		_device="bravoc"
 		_udev_v="0bb4"
 		;;
-	 4) echo "Vendor=HTC, Device=Desire GSM"
+	    4) echo "Vendor=HTC, Device=Desire GSM"
 		_vendor="htc"
 		_device="bravo"
 		_udev_v="0bb4"
 		;;
-	 5) echo "Vendor=HTC, Device=Dream"
+	    5) echo "Vendor=HTC, Device=Dream"
 		_vendor="htc"
 		_device="dream_sapphire"
 		_udev_v="0bb4"
                 _incompatible="dream"
 		;;
-	 6) echo "Vendor=HTC, Device=Evo 4G"
+	    6) echo "Vendor=HTC, Device=Evo 4G"
 		_vendor="htc"
 		_device="supersonic"
 		_udev_v="0bb4"
 		;;
-	 7) echo "Vendor=HTC, Device=Glacier"
+	    7) echo "Vendor=HTC, Device=Glacier"
 		_vendor="htc"
 		_device="glacier"
 		_udev_v="0bb4"
 		;;
-	 8) echo "Vendor=HTC, Device=Hero CDMA"
+	    8) echo "Vendor=HTC, Device=Hero CDMA"
 		_vendor="htc"
 		_device="heroc"
 		_udev_v="0bb4"
 		_idev_p="0c9a"
 		;;
-	 9) echo "Vendor=HTC, Device=Hero GSM"
+	    9) echo "Vendor=HTC, Device=Hero GSM"
 		_vendor="htc"
 		_device="hero"
 		_udev_v="0bb4"
 		_idev_p="0c99"
 		;;
-	 10) echo "Vendor=HTC, Device=Incredible"
+	    10) echo "Vendor=HTC, Device=Incredible"
 		_vendor="htc"
 		_device="inc"
 		_udev_v="skip"
@@ -348,18 +363,18 @@ case  $vendor in
 		sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"0bb4\", ATTRS{idProduct}==\"0fff\", MODE=\"0666\", OWNER=\"$user\" #Fastboot dinc' >> /etc/udev/rules.d/51-android.rules"
 		sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"0bb4\", ATTRS{idProduct}==\"0c94\", MODE=\"0666\", OWNER=\"$user\" #Bootloader dinc' >> /etc/udev/rules.d/51-android.rules"
 		;;
-	 11) echo "Vendor=HTC, Device=Legend"
+	    11) echo "Vendor=HTC, Device=Legend"
 		_vendor="htc"
 		_device="legend"
 		_udev_v="0bb4"
 		;;
-	 12) echo "Vendor=HTC, Device=Magic"
+	    12) echo "Vendor=HTC, Device=Magic"
 		_vendor="htc"
 		_device="dream_sapphire"
 		_udev_v="0bb4"
                 _incompatible="dream"
 		;;
-	 13) echo "Vendor=HTC, Device=Passion"
+	    13) echo "Vendor=HTC, Device=Passion"
 		_vendor="htc"
 		_device="passion"
 		_udev_v="skip"
@@ -367,29 +382,29 @@ case  $vendor in
 		sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"18d1\", ATTRS{idProduct}==\"4e12\", MODE=\"0666\", OWNER=\"$user\" #Debug & Recovery Nexus One' >> /etc/udev/rules.d/51-android.rules"
 		sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"0bb4\", ATTRS{idProduct}==\"0fff\", MODE=\"0666\", OWNER=\"$user\" #Fastboot Nexus One' >> /etc/udev/rules.d/51-android.rules"
 		;;
-	 14) echo "Vendor=HTC, Device=Slide"
+	    14) echo "Vendor=HTC, Device=Slide"
 		_vendor="htc"
 		_device="espresso"
 		_udev_v="0bb4"
 		_idev_p="0e03"
 		;;
-	 15) echo "Vendor=HTC, Device=Vision"
+	    15) echo "Vendor=HTC, Device=Vision"
 		_vendor="htc"
 		_device="vision"
 		_udev_v="0bb4"
 		_idev_p="0c91"
 		;;
-	 16) echo "Vendor=HTC, Device=Wildfire"
+	    16) echo "Vendor=HTC, Device=Wildfire"
 		_vendor="htc"
 		_device="buzz"
 		_udev_v="0bb4"
 		;;	
-         17) echo "Vendor=HTC, Device=Leo"
+            17) echo "Vendor=HTC, Device=Leo"
 		_vendor="htc"
 		_device="leo"
 		_udev_v="0bb4"
 		;;
-         18) echo "Vendor=HTC, Device=Incredible2"
+            18) echo "Vendor=HTC, Device=Incredible2"
 		_vendor="htc"
 		_device="vivow"
 		_udev_v="skip"
@@ -397,37 +412,37 @@ case  $vendor in
 		sudo sh -c "echo 'SUBSYSTEM==\"usb\", ATTRS{idVendor}==\"0bb4\", ATTRS{idProduct}==\"0c94\", MODE=\"0666\", OWNER=\"$user\" #Bootloader Inc2' >> /etc/udev/rules.d/51-android.rules"
 		sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"0bb4\", ATTRS{idProduct}==\"0ff0\", MODE=\"0666\", OWNER=\"$user\" Fastboot Inc2' >> /etc/udev/rules.d/51-android.rules"	
 		;;         
-	19) echo "Vendor=HTC, Device=Tattoo"
+	    19) echo "Vendor=HTC, Device=Tattoo"
 		_vendor="htc"
 		_device="click"
 		_udev_v="0bb4"
 		;;
-           esac
+        esac
 	;;
 
 ## Prints Motorolla devices selection menu
-4) Motodev_menu
+    4|Motorola) Motodev_menu
 	echo
 	echo -n "Select Device(1-3): "
 	read device
 	while [[ $device -lt 1 || $device -gt 3 ]]; do
-		echo "Selection ERROR.."
-		echo -n "Select Device(1-3): "
-		read device
+	    echo "Selection ERROR.."
+	    echo -n "Select Device(1-3): "
+	    read device
 	done
 	echo
 	case $device in
-	 1) echo "Vendor=Motorola, Device=Droid"
+	    1) echo "Vendor=Motorola, Device=Droid"
 		_vendor="motorola"
 		_device="sholes"
 		_udev_v="22b8"
 		;;
-	 2) echo "Vendor=Motorola, Device=Cliq XT"
+	    2) echo "Vendor=Motorola, Device=Cliq XT"
 		_vendor="motorola"
 		_device="zeppelin"
 		_udev_v="skip"
 		;;
-	 2) echo "Vendor=Motorola, Device=Droid X"
+	    3) echo "Vendor=Motorola, Device=Droid X"
 		_vendor="motorola"
 		_device="shadow"
 		_udev_v="skip"
@@ -437,23 +452,23 @@ case  $vendor in
 	;; 
 
 
- 5) Samsungdev_menu
+    5|Samsung) Samsungdev_menu
 	echo
 	echo -n "Select Device(1-7): "
 	read device
 	while [[ $device -lt 1 || $device -gt 7 ]]; do
-		echo "Selection ERROR.."
-		echo -n "Select Device(1-7): "
-		read device
+	    echo "Selection ERROR.."
+	    echo -n "Select Device(1-7): "
+	    read device
 	done
 	echo
 	case $device in
-	 1) echo "Vendor=Samsung, Device=Galaxy S"
+	    1) echo "Vendor=Samsung, Device=Galaxy S"
 		_vendor="samsung"
 		_device="galaxysmtd"
 		_udev_v="skip"
 		;;
-	 2) echo "Vendor=Samsung, Device=Nexus S"
+	    2) echo "Vendor=Samsung, Device=Nexus S"
 		_vendor="samsung"
 		_device="crespo"
 		_udev_v="skip"
@@ -461,17 +476,17 @@ case  $vendor in
 		sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"18d1\", ATTRS{idProduct}==\"4e22\", MODE=\"0666\", OWNER=\"$user\" #Debug & Recovery nexus s' >> /etc/udev/rules.d/51-android.rules"
 		sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"18d1\", ATTRS{idProduct}==\"4e20\", MODE=\"0666\", OWNER=\"$user\" #Fastboot nexus s' >> /etc/udev/rules.d/51-android.rules"
 		;;
-	 3) echo "Vendor=Samsung, Device=Captivate"
+	    3) echo "Vendor=Samsung, Device=Captivate"
 		_vendor="samsung"
 		_device="captivatemtd"
 		_udev_v="skip"
 		;;
-	 4) echo "Vendor=Samsung, Device=Vibrant"
+	    4) echo "Vendor=Samsung, Device=Vibrant"
 		_vendor="samsung"
 		_device="vibrantmtd"
 		_udev_v="skip"
 		;;
-	 5) echo "Vendor=Samsung, Device=Galaxy S II"
+	    5) echo "Vendor=Samsung, Device=Galaxy S II"
 		_vendor="samsung"
 		_device="galaxys2"
 		_udev_v="skip"
@@ -479,7 +494,7 @@ case  $vendor in
 		sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"04e8\", ATTRS{idProduct}==\"685e\", MODE=\"0666\", OWNER=\"$user\" #Debug & Recovery Galaxy S II' >> /etc/udev/rules.d/51-android.rules"
 		sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"04e8\", ATTRS{idProduct}==\"685e\", MODE=\"0666\", OWNER=\"$user\" #Fastboot Galaxy S II' >> /etc/udev/rules.d/51-android.rules"
 		;;
-	 6) echo "Vendor=Samsung, Device=Fascinate"
+	    6) echo "Vendor=Samsung, Device=Fascinate"
 		_vendor="samsung"
 		_device="fascinatemtd"
 		_udev_v="skip"
@@ -487,7 +502,7 @@ case  $vendor in
 		sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"04e8\", ATTRS{idProduct}==\"685e\", MODE=\"0666\", OWNER=\"$user\" #Debug & Recovery Fascinate' >> /etc/udev/rules.d/51-android.rules"
 		sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"04e8\", ATTRS{idProduct}==\"685e\", MODE=\"0666\", OWNER=\"$user\" #Fastboot Fascinate' >> /etc/udev/rules.d/51-android.rules"
 		;;
-	7) echo "Vendor=Samsung, Device=Nexus S 4G"
+	    7) echo "Vendor=Samsung, Device=Nexus S 4G"
 		_vendor="samsung"
 		_device="crespo4g"
 		_udev_v="skip"
@@ -498,17 +513,17 @@ case  $vendor in
 		
 	esac
 	;;
- 6) echo "Vendor=Viewsonic, Device=G Tablet"
+    6|Viewsonic) echo "Vendor=Viewsonic, Device=G Tablet"
 	_vendor="nvidia"
 	_device="harmony"
 	_udev_v="0955"
 	;;
- 7) echo "Vendor=ZTE, Device=Blade"
+    7|ZTE) echo "Vendor=ZTE, Device=Blade"
 	_vendor="zte"
 	_device="blade"
 	_udev_v="19D2"
 	;;
- 8) LGdev_menu
+    8|LG) LGdev_menu
 	echo
 	echo -n "Select Device(1-2): "
 	read device
@@ -519,33 +534,38 @@ case  $vendor in
 	done
 	echo
 	case $device in
-	 1) echo "Vendor=LG, Device=G2x"
+	    1) echo "Vendor=LG, Device=G2x"
 		_vendor="lge"
 		_device="p999"
 		_udev_v="skip"
 		;;
-	 2) echo "Vendor=LG, Device=Optimus 2X"
+	    2) echo "Vendor=LG, Device=Optimus 2X"
 		_vendor="lge"
 		_device="p990"
 		_udev_v="skip"
 		;;
 	esac
 	;; 
- 9) echo "Vendor=Barnes & Noble, Device=Nook Color"
+    9|Barnes*Noble) echo "Vendor=Barnes & Noble, Device=Nook Color"
 	_vendor="bn"
 	_device="encore"
 	_udev_v="skip"
-sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"2080\", ATTRS{idProduct}==\"0ff9\", MODE=\"0660\", OWNER=\"$user\" #Normal encore' >> /etc/udev/rules.d/51-android.rules"
-sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"2080\", ATTRS{idProduct}==\"0fff\", MODE=\"0660\", OWNER=\"$user\" #Fastboot encore' >> /etc/udev/rules.d/51-android.rules"
-sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"2080\", ATTRS{idProduct}==\"skip\", MODE=\"0660\", OWNER=\"$user\" #Debug & Recovery encore' >> /etc/udev/rules.d/51-android.rules"
-mkdir -p ~/.android && echo 0x2080 > ~/.android/adb_usb.ini
+	sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"2080\", ATTRS{idProduct}==\"0ff9\", MODE=\"0660\", OWNER=\"$user\" #Normal encore' >> /etc/udev/rules.d/51-android.rules"
+	sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"2080\", ATTRS{idProduct}==\"0fff\", MODE=\"0660\", OWNER=\"$user\" #Fastboot encore' >> /etc/udev/rules.d/51-android.rules"
+	sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"2080\", ATTRS{idProduct}==\"skip\", MODE=\"0660\", OWNER=\"$user\" #Debug & Recovery encore' >> /etc/udev/rules.d/51-android.rules"
+	mkdir -p ~/.android && echo 0x2080 > ~/.android/adb_usb.ini
 	;;
-
- 10) echo "For building Emulator images, use the build.sh script from your desktop"
+    
+    10|Emulator) echo "For building Emulator images, use the build.sh script from your desktop"
 	echo "Vendor=Generic, Device=Emulator"
-		_vendor="generic"
-		_device="generic"
-;;
+	_vendor="generic"
+	_device="generic"
+	;;
+    *)
+	echo "Vendor ${vendor} is invalid!"
+	vendor_menu
+	exit
+	;;
 esac
 
 
@@ -553,13 +573,13 @@ echo
 echo
 ##Installing udev drivers
 if [ "$_udev_v" != "skip" ]; then {
-sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"$_udev_v\", ATTRS{idProduct}==\"0ff9\", MODE=\"0666\", OWNER=\"$user\" #Normal $_device' >> /etc/udev/rules.d/51-android.rules"
-sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"$_udev_v\", ATTRS{idProduct}==\"0fff\", MODE=\"0666\", OWNER=\"$user\" #Fastboot $_device' >> /etc/udev/rules.d/51-android.rules"
+	sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"$_udev_v\", ATTRS{idProduct}==\"0ff9\", MODE=\"0666\", OWNER=\"$user\" #Normal $_device' >> /etc/udev/rules.d/51-android.rules"
+	sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"$_udev_v\", ATTRS{idProduct}==\"0fff\", MODE=\"0666\", OWNER=\"$user\" #Fastboot $_device' >> /etc/udev/rules.d/51-android.rules"
 }
 fi
 
 if [ "$_idev_v" != "skip" ]; then {
-sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"$_udev_v\", ATTRS{idProduct}==\"$_idev_p\", MODE=\"0666\", OWNER=\"$user\" #Debug & Recovery $_device' >> /etc/udev/rules.d/51-android.rules"
+	sudo sh -c "echo 'SUBSYSTEMS==\"usb\", ATTRS{idVendor}==\"$_udev_v\", ATTRS{idProduct}==\"$_idev_p\", MODE=\"0666\", OWNER=\"$user\" #Debug & Recovery $_device' >> /etc/udev/rules.d/51-android.rules"
 }
 fi
 
@@ -569,23 +589,23 @@ sudo restart udev
 ny=0
 yn=0
 
-##Loop until get aswer y/yes
+##Loop until get answer y/yes
 while [ "$yn" != "y" ]; do
-echo -e '\E[39;41m'"\033[1mPlease connect your device to your computer with debug mode enabled (Settings » Applications » Development » check 'USB Debugging'.)\033[0m"
-echo 'Notice: if you are using a virtual machine please select the phone from the usb devices of the VB machine'
-echo 
-sudo adb kill-server
-sudo adb start-server
-echo
-echo
-sudo adb devices
-echo "is it connected? (y/n)"
-echo "You should see your device listed under the \"List of devices attached\" msg"
-echo
-echo "Pressing \"n\" will keep trying again and again. If you don't want the proprietary files to be downloaded from your phone cause you already have them (no you can not build cm without them) press \"y\" and just ignore the errors"
-echo
-echo "If you have the phone connected and it's still not displayed, Please search for \"adb udev\" in XDA, CyanogenMod or other android webpages. If needed contact me @nicandris (at tweeter/xda/cyanogenmod)"
-read yn
+    echo -e '\E[39;41m'"\033[1mPlease connect your device to your computer with debug mode enabled (Settings » Applications » Development » check 'USB Debugging'.)\033[0m"
+    echo 'Notice: if you are using a virtual machine please select the phone from the usb devices of the VB machine'
+    echo 
+    sudo adb kill-server
+    sudo adb start-server
+    echo
+    echo
+    sudo adb devices
+    echo "Is it connected? (y/n)"
+    echo "You should see your device listed under the \"List of devices attached\" msg"
+    echo
+    echo "Pressing \"n\" will keep trying again and again. If you don't want the proprietary files to be downloaded from your phone cause you already have them (no, you can NOT build CM without them) press \"y\" and just ignore the errors"
+    echo
+    echo "If you have the phone connected and it's still not displayed, Please search for \"adb udev\" in XDA, CyanogenMod or other android webpages. If needed contact me @nicandris (at tweeter/xda/cyanogenmod)"
+    read yn
 done
 sudo adb kill-server
 sudo adb start-server
@@ -598,11 +618,11 @@ echo
 echo
 
 
-##Loop until get aswer y/yes
+##Loop until get answer y/yes
 until [ "$ny" == "y" ]; do
 echo
 echo
-echo "Was the above extraction successfull (n/y)?"
+echo "Was the above extraction successful (n/y)?"
 read ny
 ##just to be sure ;)
 sudo adb kill-server
@@ -618,15 +638,15 @@ cd ~/android/system/
 repo sync
 USE_CCACHE=1
 if [ "$_incompatible" == "0" ]; then {
-. build/envsetup.sh && brunch $_device
+	. build/envsetup.sh && brunch $_device
 }
 fi
 
 if [ "$_incompatible" == "dream" ]; then {
-cd ~/android/system/
-. build/envsetup.sh
-lunch cyanogen_dream_sapphire-eng
-mka bacon
+	cd ~/android/system/
+	. build/envsetup.sh
+	lunch cyanogen_dream_sapphire-eng
+	mka bacon
 }
 fi
 
@@ -634,18 +654,21 @@ fi
 ##The builds will be copied to the desktop folder Builds. delete these 3 lines if not wanted
 
 if [[ -d ~/Desktop/Builds ]] ; then
-            echo '~/Desktop/Builds' 'Dir Exists'
-        else
-            mkdir -p ~/Desktop/Builds
-        fi
+    echo '~/Desktop/Builds' 'Dir Exists'
+else
+    mkdir -p ~/Desktop/Builds
+fi
 
+TODAY=$(date +%d_%m-%H.%M)
+UPDATE=update-cm7-$_device-$TODAY.zip
+UPDATESUM=update-cm7-$_device-$TODAY.md5sum
 
-cp ~/android/system/out/target/product/$_device/update*.zip ~/Desktop/Builds/update-cm7-$_device-$(date +%d_%m-%H.%M).zip
-cp ~/android/system/out/target/product/$_device/update*.md5sum ~/Desktop/Builds/update-cm7-$_device-$(date +%d_%m-%H.%M).md5sum
+cp ~/android/system/out/target/product/$_device/update*.zip ~/Desktop/Builds/$UPDATE
+cp ~/android/system/out/target/product/$_device/update*.md5sum ~/Desktop/Builds/$UPDATESUM
 
 ##Create the build.sh script
 
-rm ~/Desktop/build.sh
+rm -f ~/Desktop/build.sh
 if [ "$_incompatible" == "0" ]; then {
 sh -c "echo 'clear' >> ~/Desktop/build.sh"
 sh -c "echo 'echo' >> ~/Desktop/build.sh"
