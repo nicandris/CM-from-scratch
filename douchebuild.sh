@@ -164,7 +164,7 @@ fi
 
 
 ##get repo
-curl https://raw.github.com/android/tools_repo/master/repo > ~/bin/repo
+curl https://dl-ssl.google.com/dl/googlesource/git-repo/repo > ~/bin/repo
 chmod a+x ~/bin/repo
 echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
 export PATH=$PATH:$HOME/bin
